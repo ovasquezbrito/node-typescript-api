@@ -1,8 +1,15 @@
-describe('Pruebas de pronóstico de playas funcionales', () => {
-    it('debería devolver un pronóstico con solo unas pocas líneas', async() => {
-        const { body, status } = await global.testRequest.get('/forecast');
-        expect(status).toBe(200);
-        expect(body).toEqual([
+import { Controller, Get } from '@overnightjs/core';
+import {Request, Response} from 'express';
+
+@Controller('forecast')
+export class ForecastController {
+   
+    /**
+     * name
+     */
+    @Get('')
+    public getForecastForLoggeUser(_: Request, res: Response): void {
+        res.send([
             {
               "time": "2020-04-26T00:00:00+00:00",
               "forecast": [
@@ -42,6 +49,6 @@ describe('Pruebas de pronóstico de playas funcionales', () => {
               ]
             }
           ]
-          );
-    });
-});
+          )
+    }
+}
